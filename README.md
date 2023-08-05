@@ -3,7 +3,7 @@
 This demo shows capabilities of envoy proxy sidecar, 
 in a service-to-service communication, between product service (written in python) 
 and inventory service (written in java). Also, how jwt token validation can be done on the sidecar side, 
-as well as logging.
+as well as logging using custom filter written in Lua.
 
 ## Architecture of the system
 ![img.png](images/envoy.png)
