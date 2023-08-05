@@ -6,7 +6,7 @@ and inventory service (written in java). Also, how jwt token validation can be d
 as well as logging.
 
 ## Architecture of the system
-![img.png](images/img.png)
+![img.png](images/envoy.png)
 
 product-service is a proxy service which validates token issued by keycloak, and sends request to inventory-service through its sidecar
 
