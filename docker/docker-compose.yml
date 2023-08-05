@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  inventory-service:
+    container_name: inventory-service
+    image: inventory-app
+    networks:
+      - envoy-net
+
+  sc-inventory:
+    container_name: sc-inventory
+    image: sc-inventory
+    networks:
+      - envoy-net
+    ports:
+      - "8081:8081"
+      - "9901:9901"
+    volumes:
+      - ./envoy/envoy-inventory.yml:/etc/envoy.yml
+
+  sc-product:
+    container_name: sc-product
+    image: sc-product
+    networks:
+      - envoy-net
+    ports:
+      - "8082:8082"
+      - "9902:9901"
+    volumes:
+      - ./envoy/envoy-product.yml:/etc/envoy.yml
+
+  product-service:
+    container_name: product-service
+    image: product-app
+    networks:
+      - envoy-net
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0.0
+    command: start-dev
+    networks:
+      - envoy-net
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: keycloak_system_admin
+
+networks:
+  envoy-net:
